@@ -30,7 +30,7 @@ export default function Cart() {
           key={item.id}
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr auto auto auto auto",
+            gridTemplateColumns: "1fr auto auto auto auto auto auto",
             gap: 10,
             alignItems: "center",
             padding: 12,
@@ -45,6 +45,16 @@ export default function Cart() {
           {/* QTY */}
           <div style={{ fontWeight: 600 }}>
             Qty: {item.qty}
+          </div>
+
+          {/* PRICE */}
+          <div style={{ fontWeight: 600 }}>
+            ${item.price.toFixed(2)}
+          </div>
+
+          {/* SUBTOTAL */}
+          <div style={{ fontWeight: 600 }}>
+            ${ (item.price * item.qty).toFixed(2) }
           </div>
 
           {/* ➖ */}
@@ -65,6 +75,7 @@ export default function Cart() {
                 id: item.id,
                 title: item.title,
                 qty: 1,
+                price: item.price,
               })
             }
             style={{

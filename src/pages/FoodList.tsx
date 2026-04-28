@@ -121,6 +121,7 @@ export default function FoodList() {
                     id: food.id,
                     title: food.name,
                     qty: qty,
+                    price: food.price,
                   });
 
                   setMessage(`${qty} x ${food.name} added to cart`);
