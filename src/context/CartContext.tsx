@@ -5,11 +5,12 @@ type CartItem = {
   title: string;
   qty: number;
   price: number;
+  image?: string;
 };
 
 type CartContextType = {
   cart: CartItem[];
-  addToCart: (item: { id: number; title: string; qty?: number; price?: number }) => void;
+  addToCart: (item: { id: number; title: string; qty?: number; price?: number; image?: string }) => void;
   removeFromCart: (id: number) => void;
   decreaseQty: (id: number) => void;
   clearCart: () => void;
@@ -21,7 +22,7 @@ export function CartProvider({ children }: any) {
   const [cart, setCart] = useState<CartItem[]>([]);
 
   // ➕ ADD TO CART (SAFE VERSION)
-  const addToCart = (item: { id: number; title: string; qty?: number; price?: number }) => {
+  const addToCart = (item: { id: number; title: string; qty?: number; price?: number; image?: string }) => {
     const qtyToAdd = item.qty ?? 1;
 
     if (qtyToAdd <= 0) return;
@@ -36,6 +37,7 @@ export function CartProvider({ children }: any) {
                 ...c,
                 qty: c.qty + qtyToAdd,
                 price: item.price ?? c.price,
+                image: item.image ?? c.image,
               }
             : c
         );
@@ -48,6 +50,7 @@ export function CartProvider({ children }: any) {
           title: item.title,
           qty: qtyToAdd,
           price: item.price ?? 0,
+          image: item.image,
         },
       ];
     });

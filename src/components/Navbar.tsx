@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 
 export default function Navbar() {
@@ -11,43 +11,33 @@ export default function Navbar() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        gap: 20,
-        padding: 15,
-        background: "#111",
-      }}
-    >
-      <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
-        <Link style={{ color: "white" }} to="/">Home</Link>
-        <Link style={{ color: "white" }} to="/foods">Foods</Link>
-        <Link style={{ color: "white" }} to="/cart">
-          Cart 🛒 ({cart.length})
-        </Link>
-        <Link style={{ color: "white" }} to="/order">Checkout</Link>
+    <nav className="navbar">
+      <div className="nav-links">
+        <NavLink to="/" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
+          Home
+        </NavLink>
+        <NavLink to="/foods" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
+          Foods
+        </NavLink>
+        <NavLink
+          to="/cart"
+          className={({ isActive }) =>
+            isActive ? "nav-link active cart-pill" : "nav-link cart-pill"
+          }
+        >
+          🛒 Cart ({cart.length})
+        </NavLink>
+        <NavLink to="/order" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
+          Checkout
+        </NavLink>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-        <span style={{ color: "white", fontWeight: 500 }}>
-          Hi, Admin User
-        </span>
-        <button
-          onClick={handleLogout}
-          style={{
-            padding: "8px 14px",
-            border: "1px solid #fff",
-            borderRadius: 6,
-            background: "transparent",
-            color: "white",
-            cursor: "pointer",
-          }}
-        >
+      <div className="user-actions">
+        <span style={{ color: "#e2e8f0", fontWeight: 600 }}>Hi, Admin User</span>
+        <button className="logout-button" onClick={handleLogout}>
           Logout
         </button>
       </div>
-    </div>
+    </nav>
   );
 }

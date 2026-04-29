@@ -1,56 +1,71 @@
-import { useEffect, useState } from "react";
-import { api } from "../api/axios";
+import { useMemo, useState } from "react";
 import { useCart } from "../context/CartContext";
 
+const foodCatalog = [
+  {
+    id: 1,
+    name: "Margherita Pizza",
+    description: "Fresh mozzarella, basil, and homemade tomato sauce.",
+    price: 12.99,
+    category: "Pizza",
+    image:
+      "https://images.unsplash.com/photo-1601924638867-3ec2e3844b45?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    id: 2,
+    name: "Chicken Caesar Salad",
+    description: "Crisp romaine, grilled chicken, parmesan, and creamy Caesar dressing.",
+    price: 10.49,
+    category: "Salad",
+    image:
+      "https://images.unsplash.com/photo-1529692236671-f1bb640b9c48?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    id: 3,
+    name: "Beef Burger",
+    description: "Juicy beef patty, cheddar, caramelized onions, and secret sauce.",
+    price: 11.99,
+    category: "Burger",
+    image:
+      "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    id: 4,
+    name: "Spaghetti Bolognese",
+    description: "Slow-simmered meat sauce over al dente pasta with parmesan.",
+    price: 13.49,
+    category: "Pasta",
+    image:
+      "https://images.unsplash.com/photo-1523986371872-9d3ba2e2f9b2?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    id: 5,
+    name: "Grilled Salmon",
+    description: "Tender salmon with lemon butter, served with seasonal greens.",
+    price: 16.99,
+    category: "Seafood",
+    image:
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80",
+  },
+];
+
 export default function FoodList() {
-  const [foods, setFoods] = useState<any[]>([]);
-  const [error, setError] = useState("");
+  const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [quantities, setQuantities] = useState<Record<number, number>>({});
   const [selectedFood, setSelectedFood] = useState<any>(null);
   const [message, setMessage] = useState("");
   const { addToCart } = useCart();
 
-  const realFoodList = [
-    {
-      name: "Margherita Pizza",
-      description: "Classic pizza with mozzarella & basil",
-      price: 12.99,
-    },
-    {
-      name: "Chicken Caesar Salad",
-      description: "Fresh salad with grilled chicken",
-      price: 10.49,
-    },
-    {
-      name: "Beef Burger",
-      description: "Juicy beef burger with cheese",
-      price: 11.99,
-    },
-    {
-      name: "Spaghetti Bolognese",
-      description: "Pasta with meat sauce",
-      price: 13.49,
-    },
-    {
-      name: "Grilled Salmon",
-      description: "Salmon with lemon butter sauce",
-      price: 16.99,
-    },
-  ];
+  const categories = ["All", ...Array.from(new Set(foodCatalog.map((item) => item.category)))];
 
-  useEffect(() => {
-    api
-      .get("/posts")
-      .then((res) => {
-        setFoods(
-          res.data.slice(0, realFoodList.length).map((item: any, index: number) => ({
-            id: item.id,
-            ...realFoodList[index],
-          }))
-        );
-      })
-      .catch(() => setError("Unable to load food menu"));
-  }, []);
+  const filteredFoods = useMemo(() => {
+    return foodCatalog.filter((item) => {
+      const matchesSearch = item.name.toLowerCase().includes(search.toLowerCase());
+      const matchesCategory = selectedCategory === "All" || item.category === selectedCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [search, selectedCategory]);
 
   const changeQty = (foodId: number, delta: number) => {
     setQuantities((prev) => {
@@ -65,37 +80,44 @@ export default function FoodList() {
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1 style={{ fontSize: 28, marginBottom: 20 }}>
-        🍔 Food Menu
-      </h1>
+    <div className="section-card">
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <h1 className="page-heading">🍔 Food Menu</h1>
+        <p className="page-copy">
+          Browse our delicious dishes, filter by category, and add your favorites to the cart.
+        </p>
+      </div>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {message && <div className="toast-message">{message}</div>}
 
-      {message && (
-        <p style={{ color: "green", fontWeight: 600 }}>{message}</p>
-      )}
+      <div className="search-row">
+        <input
+          className="search-input"
+          placeholder="Search foods..."
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+        />
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-          gap: 20,
-        }}
-      >
-        {foods.map((food) => {
+        <div className="filter-pill-group">
+          {categories.map((category) => (
+            <button
+              key={category}
+              className={category === selectedCategory ? "filter-pill active" : "filter-pill"}
+              onClick={() => setSelectedCategory(category)}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="cards-grid">
+        {filteredFoods.map((food) => {
           const qty = quantities[food.id] ?? 1;
 
           return (
-            <div
-              key={food.id}
-              style={{
-                border: "1px solid #ddd",
-                borderRadius: 10,
-                padding: 15,
-                background: "#fff",
-              }}
-            >
+            <article key={food.id} className="food-card">
+              <img className="food-image" src={food.image} alt={food.name} />
               {/* NAME */}
               <h3>🍽 {food.name}</h3>
 
@@ -155,7 +177,7 @@ export default function FoodList() {
               >
                 Show Details
               </button>
-            </div>
+            </article>
           );
         })}
       </div>

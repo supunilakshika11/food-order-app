@@ -12,42 +12,44 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 
 export default function App() {
   return (
-    <>
+    <div className="app-shell">
       <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+      <main className="page-container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-        {/* Protected Pages */}
-        <Route
-          path="/foods"
-          element={
-            <ProtectedRoute>
-              <FoodList />
-            </ProtectedRoute>
-          }
-        />
+          {/* Protected Pages */}
+          <Route
+            path="/foods"
+            element={
+              <ProtectedRoute>
+                <FoodList />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/cart"
-          element={
-            <ProtectedRoute>
-              <Cart />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/order"
-          element={
-            <ProtectedRoute>
-              <Order />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </>
+          <Route
+            path="/order"
+            element={
+              <ProtectedRoute>
+                <Order />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </main>
+    </div>
   );
 }
