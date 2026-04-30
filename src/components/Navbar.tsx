@@ -4,6 +4,7 @@ import { useCart } from "../context/CartContext";
 export default function Navbar() {
   const { cart } = useCart();
   const navigate = useNavigate();
+  const cartCount = cart?.length ?? 0;
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -25,7 +26,7 @@ export default function Navbar() {
             isActive ? "nav-link active cart-pill" : "nav-link cart-pill"
           }
         >
-          🛒 Cart ({cart.length})
+          🛒 Cart ({cartCount})
         </NavLink>
         <NavLink to="/order" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
           Checkout

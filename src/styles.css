@@ -307,6 +307,30 @@ a {
   align-items: center;
 }
 
+.food-detail-panel {
+  background: #f8fafc;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 18px;
+  padding: 16px 18px;
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.food-detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  color: #334155;
+  font-size: 0.95rem;
+}
+
+.detail-label {
+  font-weight: 700;
+  color: #0f172a;
+}
+
 .quantity-control,
 .food-actions {
   display: flex;

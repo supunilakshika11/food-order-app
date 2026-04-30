@@ -53,7 +53,7 @@ export default function FoodList() {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [quantities, setQuantities] = useState<Record<number, number>>({});
-  const [selectedFood, setSelectedFood] = useState<any>(null);
+  const [selectedFoodId, setSelectedFoodId] = useState<number | null>(null);
   const [message, setMessage] = useState("");
   const { addToCart } = useCart();
 
@@ -129,6 +129,23 @@ export default function FoodList() {
                 Price: ${food.price.toFixed(2)}
               </p>
 
+              {selectedFoodId === food.id && (
+                <div className="food-detail-panel">
+                  <div className="food-detail-row">
+                    <span className="detail-label">Category</span>
+                    <span>{food.category}</span>
+                  </div>
+                  <div className="food-detail-row">
+                    <span className="detail-label">Description</span>
+                    <span>{food.description}</span>
+                  </div>
+                  <div className="food-detail-row">
+                    <span className="detail-label">Ready in</span>
+                    <span>20–30 min</span>
+                  </div>
+                </div>
+              )}
+
               {/* QTY CONTROLS */}
               <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
                 <button onClick={() => changeQty(food.id, -1)}>-</button>
@@ -165,7 +182,7 @@ export default function FoodList() {
 
               {/* DETAILS */}
               <button
-                onClick={() => setSelectedFood(food)}
+                onClick={() => setSelectedFoodId(selectedFoodId === food.id ? null : food.id)}
                 style={{
                   marginTop: 8,
                   padding: "8px 12px",
@@ -175,29 +192,13 @@ export default function FoodList() {
                   borderRadius: 6,
                 }}
               >
-                Show Details
+                {selectedFoodId === food.id ? "Hide Details" : "Show Details"}
               </button>
             </article>
           );
         })}
       </div>
 
-      {/* ORDER DETAILS */}
-      {selectedFood && (
-        <div
-          style={{
-            marginTop: 20,
-            padding: 15,
-            border: "1px solid #ddd",
-            borderRadius: 10,
-          }}
-        >
-          <h2>Order Details</h2>
-          <p>{selectedFood.name}</p>
-          <p>Qty: {quantities[selectedFood.id] ?? 1}</p>
-          <p>Total: ${(selectedFood.price * (quantities[selectedFood.id] ?? 1)).toFixed(2)}</p>
-        </div>
-      )}
     </div>
   );
 }
