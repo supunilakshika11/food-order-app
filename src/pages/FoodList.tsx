@@ -1,6 +1,10 @@
 import { useMemo, useState } from "react";
 import { useCart } from "../context/CartContext";
 
+const pizzaImg = new URL("../assets/pizza.jpg", import.meta.url).href;
+const saladImg = new URL("../assets/salad.jpg", import.meta.url).href;
+const spaghettiImg = new URL("../assets/spaghetti.jpg", import.meta.url).href;
+
 const foodCatalog = [
   {
     id: 1,
@@ -8,22 +12,22 @@ const foodCatalog = [
     description: "Fresh mozzarella, basil, and homemade tomato sauce.",
     price: 12.99,
     category: "Pizza",
-    image:
-      "https://images.unsplash.com/photo-1601924638867-3ec2e3844b45?auto=format&fit=crop&w=900&q=80",
+    image: pizzaImg,
   },
   {
     id: 2,
     name: "Chicken Caesar Salad",
-    description: "Crisp romaine, grilled chicken, parmesan, and creamy Caesar dressing.",
+    description:
+      "Crisp romaine, grilled chicken, parmesan, and creamy Caesar dressing.",
     price: 10.49,
     category: "Salad",
-    image:
-      "https://images.unsplash.com/photo-1529692236671-f1bb640b9c48?auto=format&fit=crop&w=900&q=80",
+    image: saladImg,
   },
   {
     id: 3,
     name: "Beef Burger",
-    description: "Juicy beef patty, cheddar, caramelized onions, and secret sauce.",
+    description:
+      "Juicy beef patty, cheddar, caramelized onions, and secret sauce.",
     price: 11.99,
     category: "Burger",
     image:
@@ -35,8 +39,7 @@ const foodCatalog = [
     description: "Slow-simmered meat sauce over al dente pasta with parmesan.",
     price: 13.49,
     category: "Pasta",
-    image:
-      "https://images.unsplash.com/photo-1523986371872-9d3ba2e2f9b2?auto=format&fit=crop&w=900&q=80",
+    image: spaghettiImg,
   },
   {
     id: 5,
@@ -55,14 +58,23 @@ export default function FoodList() {
   const [quantities, setQuantities] = useState<Record<number, number>>({});
   const [selectedFoodId, setSelectedFoodId] = useState<number | null>(null);
   const [message, setMessage] = useState("");
+
   const { addToCart } = useCart();
 
-  const categories = ["All", ...Array.from(new Set(foodCatalog.map((item) => item.category)))];
+  const categories = [
+    "All",
+    ...Array.from(new Set(foodCatalog.map((item) => item.category))),
+  ];
 
   const filteredFoods = useMemo(() => {
     return foodCatalog.filter((item) => {
-      const matchesSearch = item.name.toLowerCase().includes(search.toLowerCase());
-      const matchesCategory = selectedCategory === "All" || item.category === selectedCategory;
+      const matchesSearch = item.name
+        .toLowerCase()
+        .includes(search.toLowerCase());
+
+      const matchesCategory =
+        selectedCategory === "All" || item.category === selectedCategory;
+
       return matchesSearch && matchesCategory;
     });
   }, [search, selectedCategory]);
@@ -84,7 +96,8 @@ export default function FoodList() {
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         <h1 className="page-heading">🍔 Food Menu</h1>
         <p className="page-copy">
-          Browse our delicious dishes, filter by category, and add your favorites to the cart.
+          Browse our delicious dishes, filter by category, and add your
+          favorites to the cart.
         </p>
       </div>
 
@@ -102,7 +115,12 @@ export default function FoodList() {
           {categories.map((category) => (
             <button
               key={category}
-              className={category === selectedCategory ? "filter-pill active" : "filter-pill"}
+              type="button"
+              className={
+                category === selectedCategory
+                  ? "filter-pill active"
+                  : "filter-pill"
+              }
               onClick={() => setSelectedCategory(category)}
             >
               {category}
@@ -118,13 +136,11 @@ export default function FoodList() {
           return (
             <article key={food.id} className="food-card">
               <img className="food-image" src={food.image} alt={food.name} />
-              {/* NAME */}
+
               <h3>🍽 {food.name}</h3>
 
-              {/* DESCRIPTION */}
               <p style={{ color: "#555" }}>{food.description}</p>
 
-              {/* PRICE */}
               <p style={{ fontWeight: 600 }}>
                 Price: ${food.price.toFixed(2)}
               </p>
@@ -135,26 +151,39 @@ export default function FoodList() {
                     <span className="detail-label">Category</span>
                     <span>{food.category}</span>
                   </div>
+
                   <div className="food-detail-row">
                     <span className="detail-label">Description</span>
                     <span>{food.description}</span>
                   </div>
+
                   <div className="food-detail-row">
                     <span className="detail-label">Ready in</span>
-                    <span>20–30 min</span>
+                    <span>20-30 min</span>
                   </div>
                 </div>
               )}
 
-              {/* QTY CONTROLS */}
-              <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                <button onClick={() => changeQty(food.id, -1)}>-</button>
+              <div
+                style={{
+                  display: "flex",
+                  gap: 10,
+                  alignItems: "center",
+                }}
+              >
+                <button type="button" onClick={() => changeQty(food.id, -1)}>
+                  -
+                </button>
+
                 <span>{qty}</span>
-                <button onClick={() => changeQty(food.id, 1)}>+</button>
+
+                <button type="button" onClick={() => changeQty(food.id, 1)}>
+                  +
+                </button>
               </div>
 
-              {/* 🟢 ADD TO CART BUTTON (UPDATED) */}
               <button
+                type="button"
                 onClick={() => {
                   addToCart({
                     id: food.id,
@@ -164,7 +193,6 @@ export default function FoodList() {
                   });
 
                   setMessage(`${qty} x ${food.name} added to cart`);
-
                   setTimeout(() => setMessage(""), 1500);
                 }}
                 style={{
@@ -180,9 +208,13 @@ export default function FoodList() {
                 Add to Cart 🛒
               </button>
 
-              {/* DETAILS */}
               <button
-                onClick={() => setSelectedFoodId(selectedFoodId === food.id ? null : food.id)}
+                type="button"
+                onClick={() =>
+                  setSelectedFoodId(
+                    selectedFoodId === food.id ? null : food.id
+                  )
+                }
                 style={{
                   marginTop: 8,
                   padding: "8px 12px",
@@ -190,6 +222,7 @@ export default function FoodList() {
                   color: "white",
                   border: "none",
                   borderRadius: 6,
+                  cursor: "pointer",
                 }}
               >
                 {selectedFoodId === food.id ? "Hide Details" : "Show Details"}
@@ -198,7 +231,6 @@ export default function FoodList() {
           );
         })}
       </div>
-
     </div>
   );
 }

@@ -1,9 +1,9 @@
 /* Global layout */
 :root {
-  color-scheme: dark;
   color: #111827;
   background: #f8fafc;
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
   line-height: 1.6;
 }
 
@@ -41,6 +41,7 @@ a {
   padding: 28px 0 48px;
 }
 
+/* Navbar */
 .navbar {
   position: sticky;
   top: 0;
@@ -117,6 +118,7 @@ a {
   background: rgba(255, 255, 255, 0.16);
 }
 
+/* Home hero */
 .hero {
   display: grid;
   align-items: center;
@@ -177,12 +179,7 @@ a {
   transform: translateY(-1px);
 }
 
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-}
-
+/* Common sections */
 .section-card {
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(148, 163, 184, 0.16);
@@ -203,6 +200,13 @@ a {
   max-width: 700px;
 }
 
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+/* Search and filters */
 .search-row {
   display: flex;
   flex-wrap: wrap;
@@ -251,6 +255,7 @@ a {
   border-color: #93c5fd;
 }
 
+/* Food cards */
 .food-card {
   display: flex;
   flex-direction: column;
@@ -259,12 +264,23 @@ a {
   overflow: hidden;
   background: white;
   border: 1px solid rgba(148, 163, 184, 0.16);
+  padding-bottom: 18px;
+}
+
+.food-card h3,
+.food-card p,
+.food-card button,
+.food-card div {
+  margin-left: 18px;
+  margin-right: 18px;
 }
 
 .food-image {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 220px;
   object-fit: cover;
+  display: block;
+  margin: 0;
 }
 
 .food-content {
@@ -370,6 +386,7 @@ a {
   margin-bottom: 20px;
 }
 
+/* Order panel */
 .order-panel {
   margin-top: 32px;
   padding: 24px;
@@ -377,6 +394,7 @@ a {
   background: #eff6ff;
 }
 
+/* Cart */
 .cart-grid {
   display: grid;
   gap: 24px;
@@ -443,6 +461,7 @@ a {
   gap: 16px;
 }
 
+/* Checkout */
 .checkout-layout {
   display: grid;
   gap: 28px;
@@ -526,11 +545,41 @@ a {
   color: #166534;
 }
 
+/* Mobile responsive */
 @media (max-width: 760px) {
+  .page-container {
+    width: min(100% - 24px, 1180px);
+    padding-top: 18px;
+  }
+
   .navbar {
     flex-direction: column;
     align-items: stretch;
     padding: 18px;
+  }
+
+  .nav-links,
+  .user-actions {
+    justify-content: center;
+  }
+
+  .section-card {
+    padding: 20px;
+  }
+
+  .hero {
+    padding: 36px 20px;
+  }
+
+  .hero-title {
+    font-size: 2.6rem;
+  }
+
+  .search-input,
+  .select-input,
+  .input-field,
+  .textarea-field {
+    max-width: 100%;
   }
 
   .cart-item {
