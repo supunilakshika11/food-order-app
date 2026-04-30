@@ -4,6 +4,7 @@ import { useCart } from "../context/CartContext";
 export default function Order() {
   const { cart, clearCart } = useCart();
   const [ordered, setOrdered] = useState(false);
+  const [trackingCode, setTrackingCode] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
@@ -19,6 +20,7 @@ export default function Order() {
     event.preventDefault();
     if (!canPlaceOrder) return;
     setOrdered(true);
+    setTrackingCode(`TRK-${Math.floor(100000 + Math.random() * 900000)}`);
     clearCart();
   };
 
@@ -132,6 +134,21 @@ export default function Order() {
           <div className="success-banner">
             <h2>✅ Order Placed Successfully!</h2>
             <p>Your food is being prepared and will arrive shortly. Thank you for ordering with us.</p>
+
+            <div className="tracking-card">
+              <div className="tracking-row">
+                <span>Order Number</span>
+                <strong>{trackingCode}</strong>
+              </div>
+              <div className="tracking-row">
+                <span>Estimated Delivery</span>
+                <strong>25-35 min</strong>
+              </div>
+              <div className="tracking-row">
+                <span>Current Status</span>
+                <strong>Preparing your order</strong>
+              </div>
+            </div>
           </div>
         )}
       </div>

@@ -4,6 +4,7 @@ import { useCart } from "../context/CartContext";
 const pizzaImg = new URL("../assets/pizza.jpg", import.meta.url).href;
 const saladImg = new URL("../assets/salad.jpg", import.meta.url).href;
 const spaghettiImg = new URL("../assets/spaghetti.jpg", import.meta.url).href;
+const fallbackImg = new URL("../assets/hero.png", import.meta.url).href;
 
 const foodCatalog = [
   {
@@ -135,7 +136,17 @@ export default function FoodList() {
 
           return (
             <article key={food.id} className="food-card">
-              <img className="food-image" src={food.image} alt={food.name} />
+              <img
+                className="food-image"
+                src={food.image || fallbackImg}
+                alt={food.name}
+                onError={(event) => {
+                  const target = event.target as HTMLImageElement;
+                  if (target.src !== fallbackImg) {
+                    target.src = fallbackImg;
+                  }
+                }}
+              />
 
               <h3>🍽 {food.name}</h3>
 
