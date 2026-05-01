@@ -1,7 +1,7 @@
 /* Global layout */
 :root {
   color: #1f2937;
-  background: #f7fee7;
+  background: #e8ddb3;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   line-height: 1.6;
@@ -14,7 +14,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(180deg, #eff6e6 0%, #f8fbe4 100%);
+  background: #e8ddb3;
 }
 
 button,
@@ -124,11 +124,12 @@ a {
   align-items: center;
   gap: 32px;
   padding: 64px 32px;
-  background: linear-gradient(135deg, #ecfdf5 0%, #fef9c3 100%);
+  background: linear-gradient(135deg, #bef264, #facc15);
   border-radius: 32px;
   color: #14532d;
   min-height: 520px;
   overflow: hidden;
+  box-shadow: 0 24px 60px rgba(16, 185, 129, 0.14);
 }
 
 .hero-grid {
@@ -141,7 +142,7 @@ a {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background: white;
+  background: #f8f2de;
   border-radius: 28px;
   border: 1px solid rgba(148, 163, 184, 0.18);
   box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
@@ -212,11 +213,11 @@ a {
 
 /* Common sections */
 .section-card {
-  background: rgba(250, 252, 224, 0.95);
-  border: 1px solid rgba(187, 247, 135, 0.32);
+  background: #e8ddb3;
+  border: 1px solid rgba(132, 204, 22, 0.35);
   border-radius: 28px;
   padding: 28px;
-  box-shadow: 0 18px 50px rgba(101, 163, 13, 0.08);
+  box-shadow: 0 18px 50px rgba(101, 163, 13, 0.12);
 }
 
 .page-heading {
@@ -252,12 +253,18 @@ a {
 .textarea-field {
   width: 100%;
   max-width: 360px;
-  border: 1px solid rgba(134, 239, 128, 0.6);
+  border: 1px solid rgba(132, 204, 22, 0.45);
   border-radius: 16px;
   padding: 14px 16px;
-  background: #f9fbe4;
+  background: #e3d4a5;
   outline: none;
   color: #14532d;
+}
+
+.search-input::placeholder,
+.input-field::placeholder,
+.textarea-field::placeholder {
+  color: #6b5f3c;
 }
 
 .select-input {
@@ -273,9 +280,9 @@ a {
 .filter-pill {
   border-radius: 999px;
   padding: 10px 16px;
-  background: #f7fee7;
+  background: #e3d4a5;
   color: #3f6212;
-  border: 1px solid rgba(134, 239, 172, 0.5);
+  border: 1px solid rgba(132, 204, 22, 0.45);
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -293,9 +300,10 @@ a {
   gap: 16px;
   border-radius: 28px;
   overflow: hidden;
-  background: white;
-  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: #ead7a1;
+  border: 1px solid rgba(132, 204, 22, 0.38);
   padding-bottom: 18px;
+  box-shadow: 0 14px 35px rgba(80, 60, 20, 0.12);
 }
 
 .food-card h3,
@@ -340,7 +348,7 @@ a {
 
 .price-pill {
   padding: 8px 14px;
-  background: #fef08a;
+  background: #f3dc74;
   color: #4d7c0f;
   border-radius: 999px;
   font-weight: 700;
@@ -355,8 +363,8 @@ a {
 }
 
 .food-detail-panel {
-  background: #f7fee7;
-  border: 1px solid rgba(134, 239, 128, 0.3);
+  background: #e3d4a5;
+  border: 1px solid rgba(132, 204, 22, 0.3);
   border-radius: 18px;
   padding: 16px 18px;
   display: grid;
@@ -388,10 +396,10 @@ a {
 
 .quantity-button,
 .action-button {
-  border: 1px solid rgba(134, 239, 128, 0.45);
+  border: 1px solid rgba(132, 204, 22, 0.45);
   border-radius: 999px;
   padding: 10px 14px;
-  background: #f9fbe4;
+  background: #e3d4a5;
   color: #14532d;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -399,7 +407,7 @@ a {
 
 .quantity-button:hover,
 .action-button:hover {
-  background: #ecfccb;
+  background: #d8c797;
 }
 
 .quantity-display {
@@ -409,9 +417,9 @@ a {
 }
 
 .toast-message {
-  color: #16a34a;
-  background: #ecfdf5;
-  border: 1px solid #bbf7d0;
+  color: #14532d;
+  background: #d9f99d;
+  border: 1px solid #84cc16;
   border-radius: 18px;
   padding: 12px 16px;
   margin-bottom: 20px;
@@ -422,7 +430,7 @@ a {
   margin-top: 32px;
   padding: 24px;
   border-radius: 24px;
-  background: #f7fee7;
+  background: #e3d4a5;
 }
 
 /* Cart */
@@ -438,7 +446,7 @@ a {
   align-items: center;
   padding: 18px;
   border-radius: 24px;
-  background: white;
+  background: #f4ecd2;
   border: 1px solid rgba(148, 163, 184, 0.16);
 }
 
@@ -501,8 +509,8 @@ a {
 .checkout-section {
   display: grid;
   gap: 18px;
-  background: white;
-  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: #e8ddb3;
+  border: 1px solid rgba(132, 204, 22, 0.28);
   border-radius: 28px;
   padding: 26px;
 }
@@ -526,10 +534,10 @@ a {
 .textarea-field,
 .select-input {
   width: 100%;
-  border: 1px solid rgba(134, 239, 128, 0.6);
+  border: 1px solid rgba(132, 204, 22, 0.45);
   border-radius: 16px;
   padding: 14px 16px;
-  background: #fefbd3;
+  background: #e3d4a5;
   color: #14532d;
 }
 
@@ -545,12 +553,12 @@ a {
 }
 
 .payment-option {
-  border: 1px solid rgba(134, 239, 128, 0.6);
+  border: 1px solid rgba(132, 204, 22, 0.45);
   border-radius: 16px;
   padding: 14px 18px;
   cursor: pointer;
   color: #14532d;
-  background: #ffffff;
+  background: #e3d4a5;
   transition: all 0.2s ease;
 }
 
@@ -565,8 +573,8 @@ a {
   gap: 18px;
   padding: 22px;
   border-radius: 22px;
-  background: #f7fee7;
-  border: 1px solid rgba(134, 239, 128, 0.35);
+  background: #e3d4a5;
+  border: 1px solid rgba(132, 204, 22, 0.35);
 }
 
 .card-details-box h3 {
@@ -611,7 +619,7 @@ a {
   margin-top: 24px;
   padding: 24px;
   border-radius: 24px;
-  background: #fef9c3;
+  background: #d8c797;
   color: #365314;
 }
 
@@ -619,7 +627,7 @@ a {
   margin-top: 18px;
   padding: 18px 20px;
   border-radius: 18px;
-  background: #ffffff;
+  background: #f4ecd2;
   border: 1px solid rgba(16, 185, 129, 0.18);
   box-shadow: 0 18px 35px rgba(16, 185, 129, 0.08);
 }
@@ -629,7 +637,7 @@ a {
   justify-content: space-between;
   gap: 16px;
   padding: 10px 0;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #d7c99b;
 }
 
 .tracking-row:last-child {

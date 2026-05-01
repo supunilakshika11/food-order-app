@@ -8,9 +8,17 @@ type CartItem = {
   image?: string;
 };
 
+type AddToCartItem = {
+  id: number;
+  title: string;
+  qty?: number;
+  price?: number;
+  image?: string;
+};
+
 type CartContextType = {
   cart: CartItem[];
-  addToCart: (item: { id: number; title: string; qty?: number; price?: number; image?: string }) => void;
+  addToCart: (item: AddToCartItem) => void;
   removeFromCart: (id: number) => void;
   decreaseQty: (id: number) => void;
   clearCart: () => void;
@@ -18,28 +26,27 @@ type CartContextType = {
 
 const CartContext = createContext<CartContextType | null>(null);
 
-export function CartProvider({ children }: any) {
+export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  // ➕ ADD TO CART (SAFE VERSION)
-  const addToCart = (item: { id: number; title: string; qty?: number; price?: number; image?: string }) => {
+  const addToCart = (item: AddToCartItem) => {
     const qtyToAdd = item.qty ?? 1;
 
     if (qtyToAdd <= 0) return;
 
     setCart((prev) => {
-      const existing = prev.find((c) => c.id === item.id);
+      const existing = prev.find((cartItem) => cartItem.id === item.id);
 
       if (existing) {
-        return prev.map((c) =>
-          c.id === item.id
+        return prev.map((cartItem) =>
+          cartItem.id === item.id
             ? {
-                ...c,
-                qty: c.qty + qtyToAdd,
-                price: item.price ?? c.price,
-                image: item.image ?? c.image,
+                ...cartItem,
+                qty: cartItem.qty + qtyToAdd,
+                price: item.price ?? cartItem.price,
+                image: item.image ?? cartItem.image,
               }
-            : c
+            : cartItem
         );
       }
 
@@ -56,25 +63,25 @@ export function CartProvider({ children }: any) {
     });
   };
 
-  // ➖ DECREASE QTY
   const decreaseQty = (id: number) => {
-    setCart((prev) => {
-      return prev
+    setCart((prev) =>
+      prev
         .map((item) =>
           item.id === id
-            ? { ...item, qty: item.qty - 1 }
+            ? {
+                ...item,
+                qty: item.qty - 1,
+              }
             : item
         )
-        .filter((item) => item.qty > 0);
-    });
+        .filter((item) => item.qty > 0)
+    );
   };
 
-  // ❌ REMOVE ITEM
   const removeFromCart = (id: number) => {
     setCart((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // 🧹 CLEAR CART
   const clearCart = () => {
     setCart([]);
   };

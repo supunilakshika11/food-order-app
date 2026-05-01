@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { useState, type FormEvent } from "react";
 import { useCart } from "../context/CartContext";
 
 export default function Order() {
@@ -93,7 +93,7 @@ export default function Order() {
           </div>
 
           <div style={{ minWidth: 180, alignSelf: "center" }}>
-            <span className="price-pill">Total ${totalAmount.toFixed(2)}</span>
+            <span className="price-pill">Total Rs. {totalAmount.toFixed(2)}</span>
           </div>
         </div>
 
@@ -277,13 +277,13 @@ export default function Order() {
                     <span>
                       {item.title} x{item.qty}
                     </span>
-                    <strong>${(item.price * item.qty).toFixed(2)}</strong>
+                    <strong>Rs. {(item.price * item.qty).toFixed(2)}</strong>
                   </div>
                 ))}
 
                 <div className="summary-item">
                   <span>Delivery fee</span>
-                  <strong>${deliveryFee.toFixed(2)}</strong>
+                  <strong>Rs. {deliveryFee.toFixed(2)}</strong>
                 </div>
 
                 <div
@@ -295,7 +295,7 @@ export default function Order() {
                   }}
                 >
                   <span>Total</span>
-                  <strong>${totalAmount.toFixed(2)}</strong>
+                  <strong>Rs. {totalAmount.toFixed(2)}</strong>
                 </div>
               </div>
             </div>

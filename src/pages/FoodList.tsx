@@ -1,9 +1,28 @@
 import { useMemo, useState } from "react";
 import { useCart } from "../context/CartContext";
 
-const pizzaImg = new URL("../assets/pizza.jpg", import.meta.url).href;
-const saladImg = new URL("../assets/salad.jpg", import.meta.url).href;
-const spaghettiImg = new URL("../assets/spaghetti.jpg", import.meta.url).href;
+const margheritaPizzaImg = new URL(
+  "../assets/margherita-pizza.jpg",
+  import.meta.url
+).href;
+
+const chickenCaesarSaladImg = new URL(
+  "../assets/chicken-caesar-salad.jpg",
+  import.meta.url
+).href;
+
+const spaghettiBologneseImg = new URL(
+  "../assets/spaghetti-bolognese.jpg",
+  import.meta.url
+).href;
+
+const beefBurgerImg = new URL("../assets/beef-burger.jpg", import.meta.url).href;
+
+const grilledSalmonImg = new URL(
+  "../assets/grilled_salmon.jpg",
+  import.meta.url
+).href;
+
 const fallbackImg = new URL("../assets/hero.png", import.meta.url).href;
 
 const foodCatalog = [
@@ -13,7 +32,7 @@ const foodCatalog = [
     description: "Fresh mozzarella, basil, and homemade tomato sauce.",
     price: 12.99,
     category: "Pizza",
-    image: pizzaImg,
+    image: margheritaPizzaImg,
   },
   {
     id: 2,
@@ -22,7 +41,7 @@ const foodCatalog = [
       "Crisp romaine, grilled chicken, parmesan, and creamy Caesar dressing.",
     price: 10.49,
     category: "Salad",
-    image: saladImg,
+    image: chickenCaesarSaladImg,
   },
   {
     id: 3,
@@ -31,8 +50,7 @@ const foodCatalog = [
       "Juicy beef patty, cheddar, caramelized onions, and secret sauce.",
     price: 11.99,
     category: "Burger",
-    image:
-      "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=900&q=80",
+    image: beefBurgerImg,
   },
   {
     id: 4,
@@ -40,7 +58,7 @@ const foodCatalog = [
     description: "Slow-simmered meat sauce over al dente pasta with parmesan.",
     price: 13.49,
     category: "Pasta",
-    image: spaghettiImg,
+    image: spaghettiBologneseImg,
   },
   {
     id: 5,
@@ -48,8 +66,7 @@ const foodCatalog = [
     description: "Tender salmon with lemon butter, served with seasonal greens.",
     price: 16.99,
     category: "Seafood",
-    image:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80",
+    image: grilledSalmonImg,
   },
 ];
 
@@ -96,6 +113,7 @@ export default function FoodList() {
     <div className="section-card">
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         <h1 className="page-heading">🍔 Food Menu</h1>
+
         <p className="page-copy">
           Browse our delicious dishes, filter by category, and add your
           favorites to the cart.
@@ -142,6 +160,7 @@ export default function FoodList() {
                 alt={food.name}
                 onError={(event) => {
                   const target = event.target as HTMLImageElement;
+
                   if (target.src !== fallbackImg) {
                     target.src = fallbackImg;
                   }
@@ -153,7 +172,7 @@ export default function FoodList() {
               <p style={{ color: "#555" }}>{food.description}</p>
 
               <p style={{ fontWeight: 600 }}>
-                Price: ${food.price.toFixed(2)}
+                Price: Rs. {food.price.toFixed(2)}
               </p>
 
               {selectedFoodId === food.id && (
@@ -201,6 +220,7 @@ export default function FoodList() {
                     title: food.name,
                     qty: qty,
                     price: food.price,
+                    image: food.image,
                   });
 
                   setMessage(`${qty} x ${food.name} added to cart`);
