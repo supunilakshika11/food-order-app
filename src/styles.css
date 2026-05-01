@@ -1,7 +1,7 @@
 /* Global layout */
 :root {
   color: #1f2937;
-  background: #e8ddb3;
+  background: #eadfbd;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   line-height: 1.6;
@@ -14,7 +14,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: #e8ddb3;
+  background: linear-gradient(180deg, #eadfbd 0%, #f1e7c7 100%);
 }
 
 button,
@@ -53,9 +53,10 @@ a {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
   padding: 16px 20px;
-  background: rgba(22, 101, 52, 0.95);
-  border-bottom: 1px solid rgba(134, 239, 172, 0.22);
+  background: #166534;
+  border-bottom: 1px solid rgba(217, 249, 157, 0.25);
   border-radius: 0 0 24px 24px;
+  box-shadow: 0 16px 35px rgba(20, 83, 45, 0.18);
   backdrop-filter: blur(16px);
 }
 
@@ -73,27 +74,28 @@ a {
 }
 
 .nav-link {
-  color: #d9f99d;
-  padding: 10px 14px;
+  color: #ecfccb;
+  padding: 10px 16px;
   border-radius: 999px;
   transition: all 0.2s ease;
+  font-weight: 600;
 }
 
 .nav-link:hover,
 .nav-link.active {
   color: #14532d;
-  background: rgba(190, 242, 100, 0.24);
+  background: rgba(190, 242, 100, 0.36);
 }
 
 .cart-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(190, 242, 100, 0.22);
-  color: #166534;
+  background: rgba(190, 242, 100, 0.28);
+  color: #14532d;
   border-radius: 999px;
   padding: 8px 12px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .user-actions {
@@ -101,10 +103,12 @@ a {
   flex-wrap: wrap;
   align-items: center;
   gap: 14px;
+  color: #ecfdf5;
+  font-weight: 700;
 }
 
 .logout-button {
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.32);
   border-radius: 999px;
   padding: 10px 16px;
   background: rgba(255, 255, 255, 0.08);
@@ -115,7 +119,7 @@ a {
 
 .logout-button:hover {
   transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.18);
 }
 
 /* Home hero */
@@ -124,12 +128,12 @@ a {
   align-items: center;
   gap: 32px;
   padding: 64px 32px;
-  background: linear-gradient(135deg, #bef264, #facc15);
+  background: linear-gradient(135deg, #14532d, #84cc16);
   border-radius: 32px;
-  color: #14532d;
+  color: #ffffff;
   min-height: 520px;
   overflow: hidden;
-  box-shadow: 0 24px 60px rgba(16, 185, 129, 0.14);
+  box-shadow: 0 24px 60px rgba(20, 83, 45, 0.22);
 }
 
 .hero-grid {
@@ -142,10 +146,10 @@ a {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background: #f8f2de;
+  background: #f7efca;
   border-radius: 28px;
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.16);
 }
 
 .hero-image {
@@ -195,29 +199,29 @@ a {
 .button-primary {
   background: linear-gradient(135deg, #84cc16, #fde047);
   color: #14532d;
-  box-shadow: 0 18px 40px rgba(132, 204, 22, 0.28);
+  box-shadow: 0 18px 40px rgba(132, 204, 22, 0.3);
 }
 
 /* Checkout Page button */
 .button-secondary {
   background: linear-gradient(135deg, #fef08a, #bef264);
   color: #14532d;
-  box-shadow: 0 18px 40px rgba(250, 204, 21, 0.22);
+  box-shadow: 0 18px 40px rgba(250, 204, 21, 0.24);
 }
 
 .button-primary:hover,
 .button-secondary:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
   background: linear-gradient(135deg, #65a30d, #facc15);
 }
 
 /* Common sections */
 .section-card {
-  background: #e8ddb3;
-  border: 1px solid rgba(132, 204, 22, 0.35);
+  background: #eadfbd;
+  border: 1px solid rgba(132, 204, 22, 0.38);
   border-radius: 28px;
   padding: 28px;
-  box-shadow: 0 18px 50px rgba(101, 163, 13, 0.12);
+  box-shadow: 0 18px 50px rgba(80, 60, 20, 0.12);
 }
 
 .page-heading {
@@ -230,6 +234,7 @@ a {
   margin: 0 0 28px;
   color: #365314;
   max-width: 700px;
+  font-weight: 500;
 }
 
 .cards-grid {
@@ -253,12 +258,21 @@ a {
 .textarea-field {
   width: 100%;
   max-width: 360px;
-  border: 1px solid rgba(132, 204, 22, 0.45);
+  border: 1px solid rgba(132, 204, 22, 0.5);
   border-radius: 16px;
   padding: 14px 16px;
   background: #e3d4a5;
   outline: none;
   color: #14532d;
+  font-weight: 500;
+}
+
+.search-input:focus,
+.select-input:focus,
+.input-field:focus,
+.textarea-field:focus {
+  border-color: #65a30d;
+  box-shadow: 0 0 0 4px rgba(132, 204, 22, 0.16);
 }
 
 .search-input::placeholder,
@@ -285,12 +299,15 @@ a {
   border: 1px solid rgba(132, 204, 22, 0.45);
   cursor: pointer;
   transition: all 0.2s ease;
+  font-weight: 600;
 }
 
+.filter-pill:hover,
 .filter-pill.active {
   background: #d9f99d;
   color: #14532d;
   border-color: #4d7c0f;
+  transform: translateY(-1px);
 }
 
 /* Food cards */
@@ -300,10 +317,16 @@ a {
   gap: 16px;
   border-radius: 28px;
   overflow: hidden;
-  background: #ead7a1;
+  background: #f2dfb0;
   border: 1px solid rgba(132, 204, 22, 0.38);
   padding-bottom: 18px;
-  box-shadow: 0 14px 35px rgba(80, 60, 20, 0.12);
+  box-shadow: 0 14px 35px rgba(80, 60, 20, 0.14);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.food-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px rgba(80, 60, 20, 0.18);
 }
 
 .food-card h3,
@@ -338,20 +361,21 @@ a {
 .food-title {
   margin: 0;
   font-size: 1.2rem;
+  color: #0f172a;
 }
 
 .food-description {
   margin: 0;
-  color: #365314;
+  color: #3f3f22;
   min-height: 48px;
 }
 
 .price-pill {
   padding: 8px 14px;
   background: #f3dc74;
-  color: #4d7c0f;
+  color: #3f6212;
   border-radius: 999px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .food-meta {
@@ -364,7 +388,7 @@ a {
 
 .food-detail-panel {
   background: #e3d4a5;
-  border: 1px solid rgba(132, 204, 22, 0.3);
+  border: 1px solid rgba(132, 204, 22, 0.35);
   border-radius: 18px;
   padding: 16px 18px;
   display: grid;
@@ -382,7 +406,7 @@ a {
 }
 
 .detail-label {
-  font-weight: 700;
+  font-weight: 800;
   color: #14532d;
 }
 
@@ -396,24 +420,27 @@ a {
 
 .quantity-button,
 .action-button {
-  border: 1px solid rgba(132, 204, 22, 0.45);
+  border: 1px solid rgba(132, 204, 22, 0.5);
   border-radius: 999px;
   padding: 10px 14px;
   background: #e3d4a5;
   color: #14532d;
   cursor: pointer;
   transition: all 0.2s ease;
+  font-weight: 700;
 }
 
 .quantity-button:hover,
 .action-button:hover {
   background: #d8c797;
+  transform: translateY(-1px);
 }
 
 .quantity-display {
   min-width: 36px;
   text-align: center;
-  font-weight: 700;
+  font-weight: 800;
+  color: #0f172a;
 }
 
 .toast-message {
@@ -423,6 +450,7 @@ a {
   border-radius: 18px;
   padding: 12px 16px;
   margin-bottom: 20px;
+  font-weight: 700;
 }
 
 /* Order panel */
@@ -446,8 +474,9 @@ a {
   align-items: center;
   padding: 18px;
   border-radius: 24px;
-  background: #f4ecd2;
-  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: #f2dfb0;
+  border: 1px solid rgba(132, 204, 22, 0.34);
+  box-shadow: 0 12px 28px rgba(80, 60, 20, 0.1);
 }
 
 .cart-item img {
@@ -465,6 +494,7 @@ a {
 .cart-item-name {
   margin: 0;
   font-size: 1.05rem;
+  color: #0f172a;
 }
 
 .cart-item-meta {
@@ -492,6 +522,7 @@ a {
   color: #f8fdf0;
   display: grid;
   gap: 14px;
+  box-shadow: 0 18px 45px rgba(20, 83, 45, 0.2);
 }
 
 .summary-item {
@@ -509,8 +540,8 @@ a {
 .checkout-section {
   display: grid;
   gap: 18px;
-  background: #e8ddb3;
-  border: 1px solid rgba(132, 204, 22, 0.28);
+  background: #eadfbd;
+  border: 1px solid rgba(132, 204, 22, 0.32);
   border-radius: 28px;
   padding: 26px;
 }
@@ -518,6 +549,7 @@ a {
 .checkout-section h2 {
   margin: 0;
   font-size: 1.4rem;
+  color: #0f172a;
 }
 
 .input-group {
@@ -526,7 +558,7 @@ a {
 }
 
 .input-group label {
-  font-weight: 700;
+  font-weight: 800;
   color: #14532d;
 }
 
@@ -534,7 +566,7 @@ a {
 .textarea-field,
 .select-input {
   width: 100%;
-  border: 1px solid rgba(132, 204, 22, 0.45);
+  border: 1px solid rgba(132, 204, 22, 0.5);
   border-radius: 16px;
   padding: 14px 16px;
   background: #e3d4a5;
@@ -553,17 +585,19 @@ a {
 }
 
 .payment-option {
-  border: 1px solid rgba(132, 204, 22, 0.45);
+  border: 1px solid rgba(132, 204, 22, 0.5);
   border-radius: 16px;
   padding: 14px 18px;
   cursor: pointer;
   color: #14532d;
   background: #e3d4a5;
   transition: all 0.2s ease;
+  font-weight: 700;
 }
 
+.payment-option:hover,
 .payment-option.active {
-  background: #dcfce7;
+  background: #d9f99d;
   border-color: #4d7c0f;
 }
 
@@ -595,7 +629,7 @@ a {
   padding: 16px 22px;
   background: linear-gradient(135deg, #84cc16, #fde047);
   color: #14532d;
-  font-weight: 800;
+  font-weight: 900;
   cursor: pointer;
   box-shadow: 0 18px 40px rgba(132, 204, 22, 0.28);
   transition: all 0.2s ease;
@@ -621,13 +655,14 @@ a {
   border-radius: 24px;
   background: #d8c797;
   color: #365314;
+  border: 1px solid rgba(132, 204, 22, 0.28);
 }
 
 .tracking-card {
   margin-top: 18px;
   padding: 18px 20px;
   border-radius: 18px;
-  background: #f4ecd2;
+  background: #f2dfb0;
   border: 1px solid rgba(16, 185, 129, 0.18);
   box-shadow: 0 18px 35px rgba(16, 185, 129, 0.08);
 }
